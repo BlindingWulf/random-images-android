@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Same glyph as ic_launcher; the round variant exists because the manifest
+     names it and some launchers ask for it specifically. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#1F2430"
+        android:pathData="M54,6 A48,48 0 1 0 54,102 A48,48 0 1 0 54,6 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,34 L78,34 A5,5 0 0 1 83,39 L83,73 A5,5 0 0 1 78,78 L36,78 A5,5 0 0 1 31,73 L31,39 A5,5 0 0 1 36,34 Z" />
+    <path
+        android:fillColor="#1F2430"
+        android:pathData="M36,39 L78,39 A2,2 0 0 1 80,41 L80,66 L69,55 L58,66 L49,57 L34,71 L34,41 A2,2 0 0 1 36,39 Z" />
+    <path
+        android:fillColor="#1F2430"
+        android:pathData="M67,44 m-5,0 a5,5 0 1 0 10,0 a5,5 0 1 0 -10,0" />
+</vector>

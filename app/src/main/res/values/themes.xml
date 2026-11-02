@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DayNight so the in-app theme switch works from API 21 through AppCompat,
+         which is what the Lollipop/Marshmallow floor needs. -->
+    <style name="Theme.RandomImages" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <!-- The viewer wants its space, so the toolbar is a slimmer 48dp with a
+         smaller title than the default 56dp action bar. -->
+    <style name="Widget.RandomImages.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="titleTextAppearance">?attr/textAppearanceTitleSmall</item>
+        <item name="titleMargin">12dp</item>
+        <item name="contentInsetStartWithNavigation">8dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+    </style>
+
+</resources>

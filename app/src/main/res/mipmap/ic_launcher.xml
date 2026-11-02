@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Launcher icon for API 21-25, which have no adaptive-icon support: the dark
+     plate and the card are drawn in one vector. mipmap-anydpi-v26 replaces it
+     with the adaptive version on newer releases. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="#1F2430"
+        android:pathData="M20,8 L88,8 A12,12 0 0 1 100,20 L100,88 A12,12 0 0 1 88,100 L20,100 A12,12 0 0 1 8,88 L8,20 A12,12 0 0 1 20,8 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,34 L78,34 A5,5 0 0 1 83,39 L83,73 A5,5 0 0 1 78,78 L36,78 A5,5 0 0 1 31,73 L31,39 A5,5 0 0 1 36,34 Z" />
+    <path
+        android:fillColor="#1F2430"
+        android:pathData="M36,39 L78,39 A2,2 0 0 1 80,41 L80,66 L69,55 L58,66 L49,57 L34,71 L34,41 A2,2 0 0 1 36,39 Z" />
+    <path
+        android:fillColor="#1F2430"
+        android:pathData="M67,44 m-5,0 a5,5 0 1 0 10,0 a5,5 0 1 0 -10,0" />
+</vector>

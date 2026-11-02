@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Random Images</string>
+
+    <!-- viewer controls -->
+    <string name="search_hint">Tag or search term (e.g. dog)</string>
+    <string name="start">Start</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="loading">Loading…</string>
+    <string name="rating_sfw">SFW</string>
+    <string name="rating_mature">Mature</string>
+    <string name="rating_explicit">Explicit</string>
+    <string name="source_random">Both</string>
+    <string name="source_e621">e621</string>
+    <string name="source_fa">FurAffinity</string>
+    <string name="interval_label">Every %1$d s</string>
+    <string name="images_shown">%1$d shown · %2$d cached</string>
+
+    <!-- menu -->
+    <string name="menu_credentials">Credentials</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_save">Save to Gallery</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_open_source">Open original</string>
+    <string name="menu_clear_cache">Clear cache</string>
+
+    <!-- credentials screen -->
+    <string name="creds_title">Credentials</string>
+    <string name="creds_e621_header">e621 (optional)</string>
+    <string name="creds_e621_help">Anonymous access already works for every rating. Adding a key only raises the rate limit: e621.net → Account → View your API key.</string>
+    <string name="creds_e621_user">e621 username</string>
+    <string name="creds_e621_key">e621 API key</string>
+    <string name="creds_fa_header">FurAffinity (optional)</string>
+    <string name="creds_fa_help">FurAffinity has no public API and its login form is captcha-gated, so paste a FAC cookie copied from a browser that is already logged in: menu → Settings → Privacy → Clear browsing data gives the same cookie, or use Developer tools → Application → Cookies → furaffinity.net → FAC.</string>
+    <string name="creds_fa_user">FurAffinity username</string>
+    <string name="creds_fa_cookie">FAC cookie</string>
+    <string name="creds_show">Show values</string>
+    <string name="creds_note">Values stay in this app\'s private storage, encrypted with a key from the phone\'s hardware keystore where it has one.</string>
+    <string name="creds_test">Test connections</string>
+    <string name="creds_testing">Testing both sites…</string>
+    <string name="creds_save">Save</string>
+    <string name="creds_clear">Delete</string>
+    <string name="creds_cleared">Credentials deleted.</string>
+    <string name="creds_saved_encrypted">Saved (encrypted, hardware key).</string>
+    <string name="creds_saved_plain">Saved. This device has no usable keystore, so the values sit unencrypted in app-private storage.</string>
+
+    <!-- settings screen -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_overlay_header">Floating image window</string>
+    <string name="settings_overlay_enable">Pop-out window over other apps</string>
+    <string name="overlay_help">Puts the current image in a small window on top of other apps, with previous / pause / next controls. It appears when you ask for it — starting a slideshow never opens it. Android asks separately for the “display over other apps” permission.</string>
+    <string name="overlay_permission_needed">Overlay permission has not been granted yet.</string>
+    <string name="grant_overlay_permission">Grant overlay permission</string>
+    <string name="overlay_size_label">Overlay width: %1$d%% of screen</string>
+    <string name="overlay_test">Turn the overlay on now</string>
+    <string name="popout_show">Pop out window</string>
+    <string name="popout_hide">Close pop-out</string>
+    <string name="popout_needs_permission">Allow drawing over other apps to pop the window out.</string>
+    <string name="settings_slideshow_header">Slideshow</string>
+    <string name="settings_no_repeat">Don\'t show the same image twice</string>
+    <string name="settings_no_repeat_help">Skips images that are already in the cache, so a search keeps going until it finds something new. Clearing the cache lets images appear again.</string>
+    <string name="settings_display_header">Display</string>
+    <string name="settings_dark">Dark theme</string>
+    <string name="settings_keep_awake">Keep the screen on while running</string>
+    <string name="settings_network_header">Network</string>
+    <string name="settings_wifi_only">Fetch on Wi-Fi only</string>
+    <string name="version_label">Version %1$s</string>
+
+    <!-- cache + dialogs -->
+    <string name="cache_clear_title">Clear image cache?</string>
+    <string name="cache_clear_body">Deletes every downloaded image from this phone. The slideshow stops first.</string>
+    <string name="cache_cleared">Cleared %1$d images.</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="saved_to_gallery">Saved to Pictures/RandomImages</string>
+    <string name="save_failed">Could not save: %1$s</string>
+    <string name="no_image">Nothing to show yet.</string>
+    <string name="share_via">Share image via</string>
+    <string name="nsfw_notice">Explicit results include adult material from e621, and on FurAffinity need a logged-in cookie. Confirm you are an adult and allowed to view it.</string>
+    <string name="i_understand">I understand</string>
+
+    <!-- notification -->
+    <string name="notifier_channel">Slideshow</string>
+    <string name="notifier_channel_hint">Ongoing notification with the slideshow controls.</string>
+    <string name="notifier_idle">Ready</string>
+</resources>

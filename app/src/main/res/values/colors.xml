@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="viewer_bg">#FF000000</color>
+    <color name="caption_bg">#EE000000</color>
+    <color name="caption_fg">#FFDDDDDD</color>
+</resources>

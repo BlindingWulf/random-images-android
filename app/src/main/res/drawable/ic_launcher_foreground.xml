@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Photo card: a white frame with a sun and a ridge, the classic "image"
+         glyph. Drawn inside the safe zone of the adaptive icon mask. -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M30,32 L78,32 A6,6 0 0 1 84,38 L84,74 A6,6 0 0 1 78,80 L30,80 A6,6 0 0 1 24,74 L24,38 A6,6 0 0 1 30,32 Z" />
+    <path
+        android:fillColor="#1F2430"
+        android:pathData="M30,37 L78,37 A2,2 0 0 1 80,39 L80,66 L68,54 L56,66 L47,57 L30,72 Z" />
+    <path
+        android:fillColor="#1F2430"
+        android:pathData="M66,41 m-5,0 a5,5 0 1 0 10,0 a5,5 0 1 0 -10,0" />
+</vector>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- The cache lives at getExternalFilesDir(null)/image_cache; share only that. -->
+    <external-files-path
+        name="cached_images"
+        path="image_cache" />
+</paths>

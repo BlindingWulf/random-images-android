@@ -1,0 +1,4 @@
+# Copy to local.properties and point sdk.dir at your Android SDK. Gradle also
+# reads the ANDROID_HOME / ANDROID_SDK_ROOT environment variables if you would
+# rather not have this file at all. Backslashes must be escaped in .properties.
+sdk.dir=C\:\\Android\\sdk

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The floating window. Gestures are handled by OverlayGestureLayout: drag to
+     move, pinch or pull the bottom-right corner to resize, tap to open the app.
+     The window itself is WRAP_CONTENT; the tile width is set in pixels by
+     OverlayController so a resize is a plain re-layout, not a window flag. -->
+<com.blindingwulf.randomimages.OverlayGestureLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/overlayRoot"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/overlayBody"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/overlay_background"
+        android:orientation="vertical"
+        android:padding="6dp">
+
+        <LinearLayout
+            android:id="@+id/overlayDragBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/overlayStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:minWidth="0dp"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:textColor="#CCFFFFFF"
+                android:textSize="11sp" />
+
+            <ImageButton
+                android:id="@+id/overlayPrevious"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentDescription="@string/previous"
+                android:padding="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_previous" />
+
+            <ImageButton
+                android:id="@+id/overlayPause"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentDescription="@string/pause"
+                android:padding="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_play" />
+
+            <ImageButton
+                android:id="@+id/overlayNext"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentDescription="@string/next"
+                android:padding="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_next" />
+
+            <ImageButton
+                android:id="@+id/overlayClose"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:contentDescription="@string/stop"
+                android:padding="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_close" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/overlayImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/app_name"
+            android:minHeight="80dp"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/overlayCaption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingTop="2dp"
+            android:textColor="#AAFFFFFF"
+            android:textSize="10sp"
+            android:visibility="gone" />
+    </LinearLayout>
+</com.blindingwulf.randomimages.OverlayGestureLayout>

@@ -1,0 +1,24 @@
+# Build output
+build/
+app/build/
+.kotlin/
+.gradle/
+captures/
+*.apk
+*.aab
+
+# Machine-local config — never meaningful outside this machine
+local.properties
+
+# Signing material: the keystore and the file that points at it stay on the
+# build machine (see keystore.properties.example). Committing either would
+# let anyone publish updates as this app.
+keystore.properties
+*.jks
+*.keystore
+
+# Scratch / editor
+riv_emu2.xml
+.idea/
+*.iml
+.DS_Store
