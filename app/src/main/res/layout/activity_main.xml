@@ -56,14 +56,15 @@
         android:textAppearance="?attr/textAppearanceBodySmall" />
 
     <!-- saveEnabled: id/panel is shared with the landscape variant (also a
-         ScrollView), and SavedState must never be restored across a rotation
+         FitScrollView), and SavedState must never be restored across a rotation
          into a different view class — the flag makes that impossible by
-         construction. The ScrollView + fillViewport pair is the hotfix for
-         tall fonts and stubby aspect ratios: when the controls fit, the
-         weighted spacers still spread them over the panel; when they do not
-         (large display-size settings, short screens), the panel scrolls
-         instead of clipping the interval row off the bottom of the screen. -->
-    <ScrollView
+         construction. The FitScrollView is the hotfix for tall fonts and
+         stubby aspect ratios: when the controls fit, the weighted spacers
+         still spread them over the panel; when they do not (large display
+         size settings, short screens), the whole panel shrinks to fit instead
+         of scrolling the search row off the top or clipping the interval row
+         off the bottom. -->
+    <com.blindingwulf.randomimages.FitScrollView
         android:id="@+id/panel"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -296,5 +297,5 @@
                 android:valueTo="300" />
         </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </com.blindingwulf.randomimages.FitScrollView>
 </LinearLayout>

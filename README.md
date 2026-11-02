@@ -13,7 +13,7 @@ network layer carries its own certificate anchors because the root stores on
 
 ## Installing
 
-Download `RandomImages-v1.1.1.apk` from the
+Download `RandomImages-v1.1.2.apk` from the
 [latest release](../../releases) and open it on the phone. Android will ask you
 to allow installs from this source (the APK is signed by the author but not
 published through Google Play, so the warning is expected). Nothing else to
@@ -137,6 +137,7 @@ app/src/main/java/com/blindingwulf/randomimages/
   SecureStore.kt           AndroidKeyStore-sealed credential storage
   Net.kt / TrustBundle.kt  HTTP client + bundled CA anchors for old Android
   ImageLoader.kt / ZoomableImageView.kt / OverlayGestureLayout.kt
+  FitScrollView.kt         control panel that shrinks to fit any display size
 ```
 
 ## Privacy
@@ -155,7 +156,7 @@ Everything else here is unlicensed and copyright the author.
 
 ## Status
 
-Version 1.1.1 runs on a moto g (2025, Android 16); the API-21 floor is enforced by
+Version 1.1.2 runs on a moto g (2025, Android 16); the API-21 floor is enforced by
 `lintDebug` in every build. The pop-out window's gestures (drag, corner pull,
 two-finger pinch resize) are implemented, but multi-touch cannot be driven from
 an automated test, so the pinch resize has not been confirmed by hand on a real

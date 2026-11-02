@@ -68,9 +68,9 @@
                 android:textAppearance="?attr/textAppearanceBodySmall" />
         </LinearLayout>
 
-        <!-- Shares id/panel with the portrait LinearLayout; see the note there on
-             why neither half of that pair may save view state. -->
-        <ScrollView
+        <!-- Shares id/panel with the portrait FitScrollView; see the note there
+             on why neither half of that pair may save view state. -->
+        <com.blindingwulf.randomimages.FitScrollView
             android:id="@+id/panel"
             android:layout_width="300dp"
             android:layout_height="match_parent"
@@ -245,6 +245,6 @@
                     android:valueFrom="1"
                     android:valueTo="300" />
             </LinearLayout>
-        </ScrollView>
+        </com.blindingwulf.randomimages.FitScrollView>
     </LinearLayout>
 </LinearLayout>
