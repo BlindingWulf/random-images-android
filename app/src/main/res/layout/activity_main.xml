@@ -139,92 +139,54 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- Rating and source rows on the left, the content filter beside them
-             (checked = blocked terms are excluded from every request; the
-             term list itself is edited from the overflow menu). singleLine is
-             off so the groups wrap instead of clipping horizontally when a
-             large display size leaves no room for the row plus the chip. -->
-        <LinearLayout
+        <!-- A plain (non-exclusive) ChipGroup used purely as the flow row for
+             the rating group and the content filter, so the filter always
+             sits immediately after the last rating chip. It used to be a
+             sibling beside a weighted column: whenever that column wrapped
+             (large display size, narrow or short screens) the chip hung
+             alone beside dead space. Now the row either stays on one line
+             or the filter wraps with it — tight at every aspect ratio.
+             The nested ratingChip group is not Checkable, so the outer group
+             ignores it and single-selection keeps working; the filter chip
+             is a direct child with its own listener. Checked = blocked terms
+             are excluded from every request; the term list itself is edited
+             from the overflow menu. -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/filterFlow"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="0dp"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/ratingGroup"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
+                app:singleSelection="true">
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/ratingGroup"
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipSfw"
+                    style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:singleSelection="true">
+                    android:checked="true"
+                    android:text="@string/rating_sfw"
+                    app:chipMinHeight="46dp" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipSfw"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="@string/rating_sfw"
-                        app:chipMinHeight="46dp" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipMature"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/rating_mature"
-                        app:chipMinHeight="46dp" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipExplicit"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/rating_explicit"
-                        app:chipMinHeight="46dp" />
-                </com.google.android.material.chip.ChipGroup>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="8dp" />
-
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/sourceGroup"
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipMature"
+                    style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:singleSelection="true">
+                    android:text="@string/rating_mature"
+                    app:chipMinHeight="46dp" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipBoth"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="@string/source_random"
-                        app:chipMinHeight="46dp" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipE621"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/source_e621"
-                        app:chipMinHeight="46dp" />
-
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipFa"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/source_fa"
-                        app:chipMinHeight="46dp" />
-                </com.google.android.material.chip.ChipGroup>
-            </LinearLayout>
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipExplicit"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rating_explicit"
+                    app:chipMinHeight="46dp" />
+            </com.google.android.material.chip.ChipGroup>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipBlacklist"
@@ -238,7 +200,45 @@
                 app:chipIcon="@drawable/ic_filter_off"
                 app:chipIconTint="?attr/colorOnSurfaceVariant"
                 app:chipMinHeight="46dp" />
-        </LinearLayout>
+        </com.google.android.material.chip.ChipGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="8dp" />
+
+        <!-- Source row spans the full panel width and wraps on its own; it has
+             no fixed-height neighbour to float beside. -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/sourceGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipBoth"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/source_random"
+                app:chipMinHeight="46dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipE621"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/source_e621"
+                app:chipMinHeight="46dp" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipFa"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/source_fa"
+                app:chipMinHeight="46dp" />
+        </com.google.android.material.chip.ChipGroup>
 
         <View
             android:layout_width="match_parent"
