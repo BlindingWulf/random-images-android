@@ -55,21 +55,32 @@
         android:paddingBottom="4dp"
         android:textAppearance="?attr/textAppearanceBodySmall" />
 
-    <!-- saveEnabled: the landscape variant of this screen makes the same id a
-         ScrollView, and its SavedState cannot be restored into a LinearLayout
-         (and vice versa) across a rotation, which crashes the restore. -->
-    <LinearLayout
+    <!-- saveEnabled: id/panel is shared with the landscape variant (also a
+         ScrollView), and SavedState must never be restored across a rotation
+         into a different view class — the flag makes that impossible by
+         construction. The ScrollView + fillViewport pair is the hotfix for
+         tall fonts and stubby aspect ratios: when the controls fit, the
+         weighted spacers still spread them over the panel; when they do not
+         (large display-size settings, short screens), the panel scrolls
+         instead of clipping the interval row off the bottom of the screen. -->
+    <ScrollView
         android:id="@+id/panel"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
         android:background="?attr/colorSurfaceContainer"
-        android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="14dp"
-        android:paddingBottom="14dp"
-        android:saveEnabled="false">
+        android:fillViewport="true"
+        android:saveEnabled="false"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -254,5 +265,6 @@
                 android:valueFrom="1"
                 android:valueTo="300" />
         </LinearLayout>
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

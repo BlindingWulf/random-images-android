@@ -13,7 +13,7 @@ network layer carries its own certificate anchors because the root stores on
 
 ## Installing
 
-Download `RandomImages-v1.0.apk` from the
+Download `RandomImages-v1.0.1.apk` from the
 [latest release](../../releases) and open it on the phone. Android will ask you
 to allow installs from this source (the APK is signed by the author but not
 published through Google Play, so the warning is expected). Nothing else to
