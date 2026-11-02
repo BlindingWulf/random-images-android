@@ -74,6 +74,32 @@ class Settings(context: Context) {
         get() = prefs.getBoolean(KEY_NSFW_ACK, false)
         set(value) = prefs.edit().putBoolean(KEY_NSFW_ACK, value).apply()
 
+    /**
+     * Content filter on/off. On by default: the terms it removes (minors,
+     * scat, gore) are not a matter of taste, and users who want them back
+     * can flip the Filter chip.
+     */
+    var blacklistEnabled: Boolean
+        get() = prefs.getBoolean(KEY_BLACKLIST_ENABLED, true)
+        set(value) = prefs.edit().putBoolean(KEY_BLACKLIST_ENABLED, value).apply()
+
+    /**
+     * Blacklist terms, one per line. Empty means "the shipped default list",
+     * so app updates can improve Blacklist.DEFAULT for users who never
+     * touched the editor; saving an empty editor resets to that state.
+     */
+    var blacklistTerms: String
+        get() = prefs.getString(KEY_BLACKLIST_TERMS, "").orEmpty()
+        set(value) = prefs.edit().putString(KEY_BLACKLIST_TERMS, value).apply()
+
+    /** Terms in force right now: the edited list when set, else the default. */
+    fun effectiveBlacklist(): List<String> =
+        blacklistTerms.lineSequence()
+            .map { it.trim() }
+            .filter { it.isNotEmpty() }
+            .toList()
+            .ifEmpty { Blacklist.DEFAULT }
+
     fun registerListener(l: SharedPreferences.OnSharedPreferenceChangeListener) {
         prefs.registerOnSharedPreferenceChangeListener(l)
     }
@@ -107,5 +133,7 @@ class Settings(context: Context) {
         private const val KEY_WIFI_ONLY = "wifi_only"
         private const val KEY_AVOID_REPEATS = "avoid_repeats"
         private const val KEY_NSFW_ACK = "nsfw_ack"
+        private const val KEY_BLACKLIST_ENABLED = "blacklist_enabled"
+        private const val KEY_BLACKLIST_TERMS = "blacklist_terms"
     }
 }

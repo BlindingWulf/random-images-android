@@ -18,6 +18,10 @@
         android:title="@string/menu_credentials"
         app:showAsAction="never" />
     <item
+        android:id="@+id/action_blacklist"
+        android:title="@string/menu_blacklist"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_settings"
         android:title="@string/menu_settings"
         app:showAsAction="never" />

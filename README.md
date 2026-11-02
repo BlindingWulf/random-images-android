@@ -13,7 +13,7 @@ network layer carries its own certificate anchors because the root stores on
 
 ## Installing
 
-Download `RandomImages-v1.0.1.apk` from the
+Download `RandomImages-v1.1.apk` from the
 [latest release](../../releases) and open it on the phone. Android will ask you
 to allow installs from this source (the APK is signed by the author but not
 published through Google Play, so the warning is expected). Nothing else to
@@ -33,9 +33,17 @@ offline and never committed here.
 ## What it does
 
 - **Tag search** against e621, FurAffinity, or both mixed
-- **Rating filter** — SFW (default), Mature, or Explicit. Explicit asks for an
-  adult confirmation the first time, and needs a logged-in FurAffinity cookie
-  for that site's adult results
+- **Rating filter** — SFW, Mature, or Explicit, each mapped strictly to that
+  one rating (SFW shows `s` only, Mature `q` only, Explicit `e` only). Explicit
+  asks for an adult confirmation the first time, and needs a logged-in
+  FurAffinity cookie for that site's adult results
+- **Filter chip** (next to the ratings, on by default): silently excludes a list
+  of blocked terms from every search at every rating — minors, scat, gore and
+  friends. Nothing appears in the search box and nothing shows in the status
+  line; the exclusions are added to the request behind the scenes, and toggling
+  the chip takes effect on the next image. Turn it off, or edit the list under
+  the overflow menu → **Edit blocked terms** (one term per line; leaving the
+  list empty restores the built-in defaults)
 - **Interval slider**, 1–300 seconds per image
 - **Pop-out window**: puts the current image in a draggable window on top of
   other apps with previous / pause / next controls, sized in Settings. It only
@@ -117,6 +125,8 @@ app/src/main/java/com/blindingwulf/randomimages/
   MainActivity.kt          viewer screen, controls, menu
   SettingsActivity.kt      overlay, slideshow, display, network settings
   CredentialsActivity.kt   optional logins + Test connections
+  BlacklistActivity.kt     blocked-terms editor
+  Blacklist.kt             default term list + silent query composition
   SlideshowEngine.kt       fetch/show/wait loop, provider fallback, retry policy
   SlideshowService.kt      foreground service + notification controls
   OverlayController.kt     the floating window
@@ -145,8 +155,8 @@ Everything else here is unlicensed and copyright the author.
 
 ## Status
 
-Version 1.0 runs on a moto g (2025, Android 16) and an Android 5.0.2 emulator.
-The pop-out window's gestures (drag, corner pull, two-finger pinch resize) are
-implemented, but multi-touch cannot be driven from an automated test, so the
-pinch resize has not been confirmed by hand on a real device — please report how
-it behaves.
+Version 1.1 runs on a moto g (2025, Android 16); the API-21 floor is enforced by
+`lintDebug` in every build. The pop-out window's gestures (drag, corner pull,
+two-finger pinch resize) are implemented, but multi-touch cannot be driven from
+an automated test, so the pinch resize has not been confirmed by hand on a real
+device — please report how it behaves.

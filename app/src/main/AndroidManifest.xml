@@ -55,6 +55,12 @@
             android:label="@string/settings_title"
             android:parentActivityName=".MainActivity" />
 
+        <activity
+            android:name=".BlacklistActivity"
+            android:exported="false"
+            android:label="@string/blacklist_title"
+            android:parentActivityName=".MainActivity" />
+
         <service
             android:name=".SlideshowService"
             android:exported="false"

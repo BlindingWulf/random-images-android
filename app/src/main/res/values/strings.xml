@@ -22,6 +22,7 @@
     <!-- menu -->
     <string name="menu_credentials">Credentials</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_blacklist">Edit blocked terms</string>
     <string name="menu_save">Save to Gallery</string>
     <string name="menu_share">Share</string>
     <string name="menu_open_source">Open original</string>
@@ -68,6 +69,17 @@
     <string name="settings_network_header">Network</string>
     <string name="settings_wifi_only">Fetch on Wi-Fi only</string>
     <string name="version_label">Version %1$s</string>
+
+    <!-- content filter -->
+    <string name="blacklist_chip">Filter</string>
+    <string name="blacklist_toggle_desc">Content filter: blocks terms like minors, scat and gore</string>
+    <string name="blacklist_title">Blocked terms</string>
+    <string name="blacklist_help">One term per line. While the Filter chip (under the ratings) is on, every search silently excludes these — nothing is added to your search box. Leave the list empty and save to restore the built-in defaults.</string>
+    <string name="blacklist_terms_hint">term_one\nterm_two\n…</string>
+    <string name="blacklist_save">Save</string>
+    <string name="blacklist_restore">Restore defaults</string>
+    <string name="blacklist_saved">Blocked terms saved.</string>
+    <string name="blacklist_restored">Default list restored.</string>
 
     <!-- cache + dialogs -->
     <string name="cache_clear_title">Clear image cache?</string>

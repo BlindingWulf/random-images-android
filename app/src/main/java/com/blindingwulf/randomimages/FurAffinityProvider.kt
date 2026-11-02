@@ -48,7 +48,7 @@ class FurAffinityProvider(
         return Net.getString("$base/search/", params, headers())
     }
 
-    override fun fetchRandom(query: String, rating: Rating): ImageResult {
+    override fun fetchRandom(query: String, rating: Rating, exclude: List<String>): ImageResult {
         if (rating == Rating.NSFW && !hasAuth) {
             return ImageResult.error(
                 name, query,
@@ -59,7 +59,10 @@ class FurAffinityProvider(
 
         val page = rnd().nextInt(1, 5)
         val html = try {
-            searchPage(query, rating, page)
+            // The blacklist rides along in the q parameter as `-word` terms
+            // (FurAffinity honours them server-side, verified live); the user
+            // never sees them in the app's own query display.
+            searchPage(Blacklist.compose(query, exclude), rating, page)
         } catch (e: Exception) {
             return ImageResult.error(name, query, "FurAffinity: ${e.message}")
         }
@@ -68,10 +71,14 @@ class FurAffinityProvider(
             .map { it.groupValues[1] to it.groupValues[2].split(" ") }
             .filter { "t-image" in it.second }
             .toList()
+        // Strict one-to-one rating mapping, mirroring E621Provider: the
+        // rating chips select exactly one band, so Mature shows mature and
+        // Explicit shows adult only. Anonymous sessions list only general
+        // results, which is why NSFW still insists on a cookie above.
         images = when (rating) {
-            Rating.QUESTIONABLE -> images.filterNot { "r-adult" in it.second }
-            Rating.SFW -> images.filterNot { "r-adult" in it.second || "r-mature" in it.second }
-            Rating.NSFW -> images
+            Rating.QUESTIONABLE -> images.filter { "r-mature" in it.second }
+            Rating.SFW -> images.filter { "r-general" in it.second }
+            Rating.NSFW -> images.filter { "r-adult" in it.second }
         }
         if (images.isEmpty()) {
             // A random 1..4 page can legitimately be empty while the search has

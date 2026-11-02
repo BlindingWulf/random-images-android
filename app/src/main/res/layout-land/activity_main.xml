@@ -119,36 +119,56 @@
                     android:layout_marginTop="6dp"
                     android:text="@string/popout_show" />
 
-                <com.google.android.material.chip.ChipGroup
-                    android:id="@+id/ratingGroup"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    app:singleLine="true"
-                    app:singleSelection="true">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipSfw"
-                        style="@style/Widget.Material3.Chip.Filter"
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/ratingGroup"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="@string/rating_sfw" />
+                        app:singleLine="true"
+                        app:singleSelection="true">
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipMature"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/rating_mature" />
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipSfw"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="@string/rating_sfw" />
 
-                    <com.google.android.material.chip.Chip
-                        android:id="@+id/chipExplicit"
-                        style="@style/Widget.Material3.Chip.Filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/rating_explicit" />
-                </com.google.android.material.chip.ChipGroup>
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipMature"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rating_mature" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chipExplicit"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rating_explicit" />
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+
+                <!-- Portrait keeps the same control; see the note there. -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipBlacklist"
+                    style="@style/Widget.Material3.Chip.Filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:checked="true"
+                    android:contentDescription="@string/blacklist_toggle_desc"
+                    android:text="@string/blacklist_chip"
+                    app:chipIcon="@drawable/ic_filter_off"
+                    app:chipIconTint="?attr/colorOnSurfaceVariant" />
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/sourceGroup"

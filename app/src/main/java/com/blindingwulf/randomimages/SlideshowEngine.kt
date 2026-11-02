@@ -107,7 +107,8 @@ class SlideshowEngine(private val context: Context) {
         }
         runningQuery = query
         update { it.copy(status = "Fetching '$query'...") }
-        log.write("start query=$query rating=${settings.rating.level} source=${settings.source}")
+        val filter = settings.blacklistEnabled.toString()
+        log.write("start query=$query rating=${settings.rating.level} source=${settings.source} filter=$filter")
         loopJob = scope.launch { runLoop(query) }
     }
 
@@ -208,6 +209,7 @@ class SlideshowEngine(private val context: Context) {
         update { it.copy(loading = true, status = "Fetching...") }
         val rating = settings.rating
         val avoidRepeats = settings.avoidRepeats
+        val exclude = if (settings.blacklistEnabled) settings.effectiveBlacklist() else emptyList()
         var lastError = "no provider tried"
         var softMisses = 0
         var hardError: String? = null
@@ -222,7 +224,7 @@ class SlideshowEngine(private val context: Context) {
             }
             for (provider in providerOrder()) {
                 val result = try {
-                    provider.fetchRandom(query, rating)
+                    provider.fetchRandom(query, rating, exclude)
                 } catch (e: Exception) {
                     log.write("provider ${provider.name} failed: ${e.message}")
                     lastError = "${provider.name}: ${e.message}"

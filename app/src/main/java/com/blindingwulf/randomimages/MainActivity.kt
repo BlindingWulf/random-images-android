@@ -27,6 +27,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.slider.Slider
 import com.google.android.material.textfield.TextInputEditText
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var intervalLabel: TextView
     private lateinit var ratingGroup: ChipGroup
     private lateinit var sourceGroup: ChipGroup
+    private lateinit var blacklistChip: Chip
     private lateinit var toolbar: MaterialToolbar
     private lateinit var panel: View
 
@@ -79,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         intervalLabel = findViewById(R.id.intervalLabel)
         ratingGroup = findViewById(R.id.ratingGroup)
         sourceGroup = findViewById(R.id.sourceGroup)
+        blacklistChip = findViewById(R.id.chipBlacklist)
         toolbar = findViewById(R.id.toolbar)
         panel = findViewById(R.id.panel)
 
@@ -95,6 +98,7 @@ class MainActivity : AppCompatActivity() {
         queryInput.setText(settings.query)
         intervalSlider.value = settings.intervalSec.toFloat()
         intervalLabel.text = getString(R.string.interval_label, settings.intervalSec)
+        blacklistChip.isChecked = settings.blacklistEnabled
         ratingGroup.check(
             when (settings.rating) {
                 Rating.SFW -> R.id.chipSfw
@@ -136,6 +140,13 @@ class MainActivity : AppCompatActivity() {
         findViewById<MaterialButton>(R.id.previousButton).setOnClickListener { engine.previous() }
 
         popoutButton.setOnClickListener { togglePopout() }
+
+        // The chip toggles the filter; the term list itself is a menu screen.
+        blacklistChip.setOnCheckedChangeListener { _, checked ->
+            if (binding) return@setOnCheckedChangeListener
+            settings.blacklistEnabled = checked
+            engine.pendingRetarget = true
+        }
 
         intervalSlider.addOnChangeListener { _, value, _ ->
             val seconds = value.toInt()
@@ -388,6 +399,7 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.action_credentials -> startActivity(Intent(this, CredentialsActivity::class.java))
             R.id.action_settings -> startActivity(Intent(this, SettingsActivity::class.java))
+            R.id.action_blacklist -> startActivity(Intent(this, BlacklistActivity::class.java))
             R.id.action_save -> saveToGallery()
             R.id.action_share -> shareImage()
             R.id.action_open_source -> openSource()

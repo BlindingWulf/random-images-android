@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom
 interface Provider {
     val name: String
     val hasAuth: Boolean
-    fun fetchRandom(query: String, rating: Rating): ImageResult
+    fun fetchRandom(query: String, rating: Rating, exclude: List<String> = emptyList()): ImageResult
     fun testAuth(): AuthResult
 }
 
@@ -60,21 +60,32 @@ class E621Provider(
         return u.takeUnless { it == "null" }.orEmpty()
     }
 
-    override fun fetchRandom(query: String, rating: Rating): ImageResult {
-        // A post carries exactly one rating and tag search is AND-based, so the
-        // rating filter is applied client-side to stay correct whatever the
-        // server-side rating syntax does.
+    override fun fetchRandom(query: String, rating: Rating, exclude: List<String>): ImageResult {
+        // One-to-one rating mapping: Explicit means explicit only — selecting
+        // it used to admit S posts, which read as a ratings bug. e621 honours
+        // rating: server-side (verified live 2026-11-03), so it is sent as a
+        // tag to widen the candidate pool; the client-side check below stays
+        // as the guarantee whatever the server does.
         val allowed = when (rating) {
-            Rating.NSFW -> setOf("s", "q", "e")
-            Rating.QUESTIONABLE -> setOf("s", "q")
+            Rating.NSFW -> setOf("e")
+            Rating.QUESTIONABLE -> setOf("q")
             Rating.SFW -> setOf("s")
         }
-        val tags = query.trim()
+        val ratingTag = "rating:" + allowed.first()
+        // The blacklist never appears in the user's query string or the
+        // status line: it is appended to the tags actually sent.
+        val tags = Blacklist.compose(query.trim() + " " + ratingTag, exclude)
 
         val first = search(tags, pageSize)
         val page1 = first.optJSONArray("posts").toPostList()
         if (page1.isEmpty()) {
-            return ImageResult.error(name, query, "e621: no posts match '$query'")
+            // A narrow query can return an empty first page while other pages
+            // still hold posts (and the sampled pages change every request),
+            // so this is a re-drawable miss, not a dead end.
+            return ImageResult.error(
+                name, query, "e621: no posts match '$query'",
+                retryable = true,
+            )
         }
 
         // posts.json exposes no total count, so variety comes from sampling a
